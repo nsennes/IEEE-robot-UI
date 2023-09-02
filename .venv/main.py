@@ -4,9 +4,13 @@ import time
 
 # Initialize pygame and set up the display
 pygame.init()
-screen = pygame.display.set_mode((800, 480))
+screen_info = pygame.display.Info()
+screen_width = screen_info.current_w
+screen_height = screen_info.current_h
+screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 status = True
+
 
 class FaceAnimation:
     def __init__(self, screen, face_list, animation_speed):
@@ -43,13 +47,13 @@ class Mood:
 mood = Mood()
 
 def setup_moods():
-    angry_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/angryFace/{i}.png'), (800, 480)) for i in range(1, 15)]
+    angry_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/angryFace/{i}.png'), (screen_width, screen_height)) for i in range(1, 15)]
     mood.add_mood("angry", angry_face_list, 0.5)
 
-    happy_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/happyFace/{i}.png'), (800, 480)) for i in range(1, 18)]
+    happy_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/happyFace/{i}.png'), (screen_width, screen_height)) for i in range(1, 18)]
     mood.add_mood("happy", happy_face_list, 0.35)
 
-    neutral_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/neutralFace/{i}.png'), (800, 480)) for i in range(1, 24)]
+    neutral_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/neutralFace/{i}.png'), (screen_width, screen_height)) for i in range(1, 24)]
     mood.add_mood("neutral", neutral_face_list, 0.6)
 
 def mood_loop(mood_name, duration=-1):
