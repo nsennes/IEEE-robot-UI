@@ -25,7 +25,6 @@ class FaceAnimation:
 
 class Mood:
     def __init__(self):
-        # Initialize face animations for different moods
         self.moods = {}
     
     def add_mood(self, name, face_list, animation_speed):
@@ -44,7 +43,6 @@ class Mood:
 mood = Mood()
 
 def setup_moods():
-    # Add different moods with their respective animations
     angry_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/angryFace/{i}.png'), (800, 480)) for i in range(1, 15)]
     mood.add_mood("angry", angry_face_list, 0.5)
 
@@ -54,8 +52,8 @@ def setup_moods():
     neutral_face_list = [pygame.transform.scale(pygame.image.load(f'graphics/neutralFace/{i}.png'), (800, 480)) for i in range(1, 24)]
     mood.add_mood("neutral", neutral_face_list, 0.6)
 
-def mood_loop(mood_name, status, duration):
-    start_ticks = pygame.time.get_ticks()  # starter tick
+def mood_loop(mood_name, duration=-1):
+    start_ticks = pygame.time.get_ticks()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -66,7 +64,8 @@ def mood_loop(mood_name, status, duration):
             mood.animate(mood_name)
             if duration != -1 and pygame.time.get_ticks() - start_ticks > duration:
                 break
+            
 
             
         pygame.display.update()
-        clock.tick(30)  # Control the frame rate
+        clock.tick(30)  # Control the frame rates
